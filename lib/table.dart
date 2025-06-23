@@ -190,62 +190,87 @@ class MachineTable extends StatelessWidget {
           const SizedBox(height: 16),
 
           // Scrollbar visible avec SingleChildScrollView horizontal
-          Scrollbar(
-            controller: scrollController,
-            thumbVisibility: true, // pour que la scrollbar soit toujours visible
-            trackVisibility: true, // optionnel : afficher la piste
-            child: SingleChildScrollView(
-              controller: scrollController,
-              scrollDirection: Axis.horizontal,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minWidth: minTableWidth),
-                child: Table(
-                  columnWidths: const {
-                    0: FlexColumnWidth(1.5),
-                    1: FlexColumnWidth(),
-                    2: FlexColumnWidth(),
-                    3: FlexColumnWidth(),
-                    4: FlexColumnWidth(),
-                    5: FlexColumnWidth(),
-                    6: FlexColumnWidth(),
-                    7: FlexColumnWidth(),
-                    8: FlexColumnWidth(),
-                  },
-                  children: [
-                    TableRow(
-                      decoration:
-                          const BoxDecoration(color: Color(0xFF2A2A3C)),
-                      children: [
-                        _buildCell('Nom', true),
-                        _buildCell('Référence', true),
-                        _buildCell('Transfo', true),
-                        _buildCell('Date', true),
-                        _buildCell('Département', true),
-                        _buildCell('Puissance', true),
-                        _buildCell('Courant', true),
-                        _buildCell('Voltage', true),
-                        _buildCell('Facteur', true),
-                      ],
-                    ),
-                    TableRow(
-                      children: [
-                        _buildCell('TR-NS-001', false),
-                        _buildCell('SN-45872391', false),
-                        _buildCell('T-1', false),
-                        _buildCell('12/03/2021', false),
-                        _buildCell('**********', false),
-                        _buildCell('** KVA', false),
-                        _buildCell('** A', false),
-                        _buildCell('** V', false),
-                        _buildCell('021245', false),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+           Padding(
+            padding: const EdgeInsets.only(bottom: 12), // espace avant scrollbar
+            child:
+Scrollbar(
+  controller: scrollController,
+  thumbVisibility: true,
+  trackVisibility: true,
+  child: Padding(
+    padding: const EdgeInsets.only(bottom: 12), // espace avant la scrollbar
+    child: SingleChildScrollView(
+      controller: scrollController,
+      scrollDirection: Axis.horizontal,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(minWidth: minTableWidth),
+        child: Table(
+          columnWidths: const {
+            0: FlexColumnWidth(1.5),
+            1: FlexColumnWidth(),
+            2: FlexColumnWidth(),
+            3: FlexColumnWidth(),
+            4: FlexColumnWidth(),
+            5: FlexColumnWidth(),
+            6: FlexColumnWidth(),
+            7: FlexColumnWidth(),
+            8: FlexColumnWidth(),
+          },
+          children: [
+            TableRow(
+              decoration: const BoxDecoration(color: Color(0xFF2A2A3C)),
+              children: [
+                _buildCell('Nom', true),
+                _buildCell('Référence', true),
+                _buildCell('Transfo', true),
+                _buildCell('Date', true),
+                _buildCell('Département', true),
+                _buildCell('Puissance', true),
+                _buildCell('Courant', true),
+                _buildCell('Voltage', true),
+                _buildCell('Facteur', true),
+              ],
             ),
-          ),
-        ],
+            TableRow(
+              children: [
+                _buildCell('TR-NS-001', false),
+                _buildCell('SN-45872391', false),
+                _buildCell('T-1', false),
+                _buildCell('12/03/2021', false),
+                _buildCell('**********', false),
+                _buildCell('** KVA', false),
+                _buildCell('** A', false),
+                _buildCell('** V', false),
+                _buildCell('021245', false),
+              ],
+            ),
+               // Ligne de séparation
+    TableRow(
+      decoration: const BoxDecoration(color: Color.fromARGB(94, 174, 220, 242)),
+      children: List.generate(9, (_) => Container(height: 1)),
+    ),
+                   TableRow(
+              children: [
+                _buildCell('TR-NS-001', false),
+                _buildCell('SN-45872391', false),
+                _buildCell('T-1', false),
+                _buildCell('12/03/2021', false),
+                _buildCell('**********', false),
+                _buildCell('** KVA', false),
+                _buildCell('** A', false),
+                _buildCell('** V', false),
+                _buildCell('021245', false),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ),
+),
+
+
+      )],
       ),
     );
   }
