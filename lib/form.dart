@@ -1,17 +1,35 @@
 
 import 'package:flutter/material.dart';
 
-class MachineForm extends StatelessWidget {
+class MachineForm extends StatefulWidget {
   const MachineForm({super.key});
 
   @override
+  State<MachineForm> createState() => _MachineFormState();
+}
+
+class _MachineFormState extends State<MachineForm> {
+  String? selectedTransfo;
+  String? selectedDepartement;
+
+  final List<String> transfos = ['T1', 'T2', 'T3'];
+  final List<String> departements = ['Production', 'Maintenance', 'Logistique'];
+
+  @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView( // Pour scroll si l'écran est petit
+    return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: const Color(0xFF1E1E2C),
           borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.3),
+          blurRadius: 10,
+          offset: const Offset(0, 4),
+        ),
+      ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,9 +51,29 @@ class MachineForm extends StatelessWidget {
                 children: [
                   _formField("Nom de la machine", isSmallScreen),
                   _formField("Référence", isSmallScreen),
-                  _formField("Transfo nombre", isSmallScreen),
+                  _dropdownField(
+                    label: "Transfo nombre",
+                    isSmallScreen: isSmallScreen,
+                    value: selectedTransfo,
+                    items: transfos,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedTransfo = value;
+                      });
+                    },
+                  ),
                   _formField("Date de fabrication", isSmallScreen),
-                  _formField("Département", isSmallScreen),
+                  _dropdownField(
+                    label: "Département",
+                    isSmallScreen: isSmallScreen,
+                    value: selectedDepartement,
+                    items: departements,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedDepartement = value;
+                      });
+                    },
+                  ),
                   _formField("Puissance (KVA)", isSmallScreen),
                   _formField("Courant (A)", isSmallScreen),
                   _formField("Voltage (V)", isSmallScreen),
@@ -46,17 +84,20 @@ class MachineForm extends StatelessWidget {
               );
             }),
             const SizedBox(height: 24),
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.add),
-              label: const Text("Ajouter"),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF00C2FF),
-                foregroundColor: Colors.white,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              ),
-            ),
+          ElevatedButton.icon(
+  onPressed: () {},
+  icon: const Icon(Icons.add),
+  label: const Text("Ajouter"),
+  style: ElevatedButton.styleFrom(
+    backgroundColor: const Color(0xFF00C2FF),
+    foregroundColor: Colors.white,
+    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+    ),
+  ),
+),
+
           ],
         ),
       ),
@@ -76,7 +117,47 @@ class MachineForm extends StatelessWidget {
             style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
               filled: true,
-              fillColor: const Color(0xFF2A2A3C),
+              fillColor: const Color(0xFF0D0D1A),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide.none,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _dropdownField({
+    required String label,
+    required bool isSmallScreen,
+    required String? value,
+    required List<String> items,
+    required void Function(String?) onChanged,
+  }) {
+    return SizedBox(
+      width: isSmallScreen ? double.infinity : 200,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label,
+              style: const TextStyle(color: Colors.white, fontSize: 14)),
+          const SizedBox(height: 6),
+          DropdownButtonFormField<String>(
+            value: value,
+            onChanged: onChanged,
+            items: items
+                .map((item) => DropdownMenuItem(
+                      value: item,
+                      child: Text(item),
+                    ))
+                .toList(),
+            dropdownColor: const Color(0xFF0D0D1A),
+            style: const TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: const Color(0xFF0D0D1A),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide.none,
