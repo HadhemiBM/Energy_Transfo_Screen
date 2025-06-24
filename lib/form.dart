@@ -20,6 +20,9 @@ class _MachineFormState extends State<MachineForm> {
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.all(16),
+          constraints: BoxConstraints(
+        minHeight: 400, // Setting the minimum height to 400
+      ),
         decoration: BoxDecoration(
           color: const Color(0xFF1E1E2C),
           borderRadius: BorderRadius.circular(12),
@@ -138,6 +141,7 @@ class _MachineFormState extends State<MachineForm> {
   }) {
     return SizedBox(
       width: isSmallScreen ? double.infinity : 200,
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
