@@ -1,3 +1,4 @@
+// Oilapp
 
 import 'package:flutter/material.dart';
 
@@ -12,26 +13,59 @@ class _MachineTableState extends State<MachineTable> {
   final ScrollController horizontalController = ScrollController();
   final ScrollController verticalController = ScrollController();
 
-  String selectedFilter = 'Filtrer';
-  final List<String> filterTypes = ['Filtrer', 'Transfo', 'Département', 'Date'];
+  String selectedFilter = 'Aucun';
+  final List<String> filterTypes = ['Aucun', 'Transfo', 'Département', 'Date'];
   String filterValue = '';
 
   final List<List<String>> machineData = [
-    ['TR-NS-001', 'SN-45872391', 'T-2', '12/05/2021', 'info', '** KVA', '** A', '** V', '021245'],
-    ['TR-NS-001', 'SN-45872391', 'T-1', '12/03/2021', 'tech', '** KVA', '** A', '** V', '021245'],
-    ['TR-NS-001', 'SN-45872391', 'T-1', '12/03/2021', '**********', '** KVA', '** A', '** V', '021245'],
+    [
+      'TR-NS-001',
+      'SN-45872391',
+      'T-2',
+      '12/05/2021',
+      'info',
+      '** KVA',
+      '** A',
+      '** V',
+      '021245',
+    ],
+    [
+      'TR-NS-001',
+      'SN-45872391',
+      'T-1',
+      '12/03/2021',
+      'tech',
+      '** KVA',
+      '** A',
+      '** V',
+      '021245',
+    ],
+    [
+      'TR-NS-001',
+      'SN-45872391',
+      'T-1',
+      '12/03/2021',
+      '**********',
+      '** KVA',
+      '** A',
+      '** V',
+      '021245',
+    ],
   ];
 
   List<List<String>> get filteredMachines {
-    if (selectedFilter == 'Filtrer' || filterValue.isEmpty) return machineData;
-    int index = selectedFilter == 'Transfo'
-        ? 2
-        : selectedFilter == 'Département'
+    if (selectedFilter == 'Aucun' || filterValue.isEmpty) return machineData;
+    int index =
+        selectedFilter == 'Transfo'
+            ? 2
+            : selectedFilter == 'Département'
             ? 4
             : selectedFilter == 'Date'
-                ? 3
-                : -1;
-    return machineData.where((row) => row[index].contains(filterValue)).toList();
+            ? 3
+            : -1;
+    return machineData
+        .where((row) => row[index].contains(filterValue))
+        .toList();
   }
 
   @override
@@ -42,70 +76,67 @@ class _MachineTableState extends State<MachineTable> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF0D0D1A),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
-          BoxShadow(color: Colors.white.withOpacity(0.3), blurRadius: 10, offset: const Offset(0, 4)),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Liste des Machines", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+          const Text(
+            "Liste des Machines",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
           const SizedBox(height: 8),
 
           // 🔍 Filter Row
-      Row(
-  children: [
-    // 🔥 Encapsuler dans un Expanded pour éviter les erreurs de layout
-    Expanded(
-      child: DropdownButtonFormField<String>(
-        value: selectedFilter,
-        items: filterTypes.map((filter) {
-          return DropdownMenuItem(
-            value: filter,
-            child: Text(filter),
-          );
-        }).toList(),
-        onChanged: (value) {
-          if (value != null) {
-            setState(() {
-              selectedFilter = value;
-              filterValue = '';
-            });
-          }
-        },
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          fillColor: const Color(0xFF0D0D1A),
-          filled: true,
-        ),
-        dropdownColor: const Color(0xFF0D0D1A),
-        style: const TextStyle(color: Colors.white),
-        iconEnabledColor: Colors.white,
-      ),
-    ),
-
-    const SizedBox(width: 16),
-
-    if (selectedFilter != 'Filtrer')
-      Expanded(
-        child: TextField(
-            style: const TextStyle(color: Colors.white),
-          decoration: const InputDecoration(
-            hintText: 'Entrez une valeur pour filtrer',
-            border: OutlineInputBorder(),
+          Row(
+            children: [
+              DropdownButton<String>(
+                value: selectedFilter,
+                items:
+                    filterTypes
+                        .map(
+                          (filter) => DropdownMenuItem(
+                            value: filter,
+                            child: Text(filter),
+                          ),
+                        )
+                        .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    selectedFilter = value!;
+                    filterValue = '';
+                  });
+                },
+              ),
+              const SizedBox(width: 16),
+              if (selectedFilter != 'Aucun')
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Entrez une valeur pour filtrer',
+                      border: OutlineInputBorder(),
+                    ),
+                    onChanged: (val) {
+                      setState(() {
+                        filterValue = val;
+                      });
+                    },
+                  ),
+                ),
+            ],
           ),
-          onChanged: (val) {
-            setState(() {
-              filterValue = val;
-            });
-          },
-        ),
-      ),
-  ],
-),
-
           const SizedBox(height: 16),
 
           /// ➤ Table with scrollbars
@@ -114,7 +145,9 @@ class _MachineTableState extends State<MachineTable> {
               controller: horizontalController,
               thumbVisibility: true,
               trackVisibility: true,
-              notificationPredicate: (notification) => notification.metrics.axis == Axis.horizontal,
+              notificationPredicate:
+                  (notification) =>
+                      notification.metrics.axis == Axis.horizontal,
               child: SingleChildScrollView(
                 controller: horizontalController,
                 scrollDirection: Axis.horizontal,
@@ -122,7 +155,9 @@ class _MachineTableState extends State<MachineTable> {
                   controller: verticalController,
                   thumbVisibility: true,
                   trackVisibility: true,
-                  notificationPredicate: (notification) => notification.metrics.axis == Axis.vertical,
+                  notificationPredicate:
+                      (notification) =>
+                          notification.metrics.axis == Axis.vertical,
                   child: SingleChildScrollView(
                     controller: verticalController,
                     scrollDirection: Axis.vertical,
@@ -143,7 +178,9 @@ class _MachineTableState extends State<MachineTable> {
                         children: [
                           // Header
                           TableRow(
-                            decoration: const BoxDecoration(color: Color(0xFF2A2A3C)),
+                            decoration: const BoxDecoration(
+                              color: Color(0xff3A5B22),
+                            ),
                             children: [
                               _buildCell('Nom', true),
                               _buildCell('Référence', true),
@@ -159,11 +196,19 @@ class _MachineTableState extends State<MachineTable> {
                           // Data Rows
                           for (var row in filteredMachines) ...[
                             TableRow(
-                              children: row.map((cell) => _buildCell(cell, false)).toList(),
+                              children:
+                                  row
+                                      .map((cell) => _buildCell(cell, false))
+                                      .toList(),
                             ),
                             TableRow(
-                              decoration: const BoxDecoration(color: Color.fromARGB(94, 174, 220, 242)),
-                              children: List.generate(9, (_) => Container(height: 1)),
+                              decoration: const BoxDecoration(
+                                color: Color.fromARGB(94, 32, 59, 36),
+                              ),
+                              children: List.generate(
+                                9,
+                                (_) => Container(height: 1),
+                              ),
                             ),
                           ],
                         ],
@@ -173,7 +218,7 @@ class _MachineTableState extends State<MachineTable> {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -185,7 +230,7 @@ class _MachineTableState extends State<MachineTable> {
       child: Text(
         text,
         style: TextStyle(
-          color: isHeader ? Colors.white : Colors.white,
+          color: isHeader ? Colors.white : Colors.black,
           fontWeight: isHeader ? FontWeight.bold : FontWeight.normal,
         ),
       ),

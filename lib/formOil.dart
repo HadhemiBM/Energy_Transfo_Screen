@@ -24,11 +24,15 @@ class _MachineFormState extends State<MachineForm> {
           minHeight: 400, // Setting the minimum height to 400
         ),
         decoration: BoxDecoration(
-        color: const Color(0xFF0D0D1A),
-           borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(color: Colors.white.withOpacity(0.3), blurRadius: 10, offset: const Offset(0, 4)),
-        ],
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.3),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +40,7 @@ class _MachineFormState extends State<MachineForm> {
             const Text(
               "Identité de la Machine",
               style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 18),
             ),
@@ -88,7 +92,7 @@ class _MachineFormState extends State<MachineForm> {
               icon: const Icon(Icons.add),
               label: const Text("Ajouter"),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF2A2A3C),
+                backgroundColor: const Color(0xff3A5B22),
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 shape: RoundedRectangleBorder(
@@ -109,17 +113,17 @@ class _MachineFormState extends State<MachineForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label,
-              style: const TextStyle(color: Colors.white, fontSize: 14)),
+              style: const TextStyle(color: Colors.black, fontSize: 14)),
           const SizedBox(height: 6),
           TextField(
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
               filled: true,
-              fillColor:Colors.black,
+              fillColor: Colors.white,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(
-                  color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.63), // Applied opacity here
+                  color: const Color.fromARGB(143, 27, 42, 22).withOpacity(0.63), // Applied opacity here
                   width: 1, // Set the width of the border
                 ),
               ),
@@ -143,7 +147,7 @@ class _MachineFormState extends State<MachineForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label,
-              style: const TextStyle(color: Colors.white, fontSize: 14)),
+              style: const TextStyle(color: Colors.black, fontSize: 14)),
           const SizedBox(height: 6),
           DropdownButtonFormField<String>(
             value: value,
@@ -154,15 +158,15 @@ class _MachineFormState extends State<MachineForm> {
                       child: Text(item),
                     ))
                 .toList(),
-            dropdownColor: Colors.black,
-            style: const TextStyle(color: Colors.white),
+            dropdownColor: Colors.white,
+            style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
               filled: true,
-              fillColor: Colors.black,
+              fillColor: Colors.white,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(
-                  color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.63), // Applied opacity here
+                  color: const Color.fromARGB(139, 27, 42, 22).withOpacity(0.63), // Applied opacity here
                   width: 1, // Set the width of the border
                 ),
               ),

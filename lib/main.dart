@@ -1,4 +1,5 @@
-// EnergyDash
+
+// oILAPP
 // import 'package:charts/form.dart';
 // import 'package:charts/table.dart';
 // import 'package:flutter/material.dart';
@@ -30,8 +31,10 @@
 //     final bool isSmallScreen = screenWidth <= 800;
 
 //     return Scaffold(
-//       backgroundColor: const Color(0xFF0D0D1A),
+//       backgroundColor: Colors.white,
+      
 //       body: SafeArea(
+        
 //         child: SingleChildScrollView( // ← rend toute la page scrollable
 //           padding: const EdgeInsets.all(16),
 //           child: Column(
@@ -79,7 +82,7 @@
 //     );
 //   }
 // }
-// oILAPP
+// EnergyDash
 import 'package:charts/form.dart';
 import 'package:charts/table.dart';
 import 'package:flutter/material.dart';
@@ -111,7 +114,7 @@ class DashboardPage extends StatelessWidget {
     final bool isSmallScreen = screenWidth <= 800;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF0D0D1A),
       
       body: SafeArea(
         

@@ -28,8 +28,8 @@ class _TransformerAvailabilityChartState extends State<TransformerAvailabilityCh
   };
 
   final List<Color> colorList = const [
-    Color(0xFFAEDCF2),
-    Color(0xFF00C2FF),
+    Color(0xFFB9C40B),
+    Color(0xFF00AC4F),
   ];
 
   @override
@@ -43,11 +43,15 @@ return SizedBox(
     // margin: const EdgeInsets.symmetric(vertical: 16),
     decoration: BoxDecoration(
       // color: const Color(0xFF0D0D1A),
-      color: const Color(0xFF0D0D1A),
+      color: Colors.white,
       borderRadius: BorderRadius.circular(16),
-       boxShadow: [
-          BoxShadow(color: Colors.white.withOpacity(0.3), blurRadius: 10, offset: const Offset(0, 4)),
-        ],
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.3),
+          blurRadius: 10,
+          offset: const Offset(0, 4),
+        ),
+      ],
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +63,7 @@ Row(
       child: Text(
         'Disponibilité des Transformateurs (KVA)',
         style: TextStyle(
-          color: Colors.white,
+          color: Colors.black,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -68,15 +72,15 @@ Row(
     Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       decoration: BoxDecoration(
-        color:const Color(0xFF2A2A3C), // Fond sombre
+        color: Colors.white, // Fond sombre
         borderRadius: BorderRadius.circular(8),
       ),
       child: DropdownButton<String>(
-        dropdownColor: Color(0xFF2A2A3C), // Fond de la liste
+        dropdownColor: Colors.white, // Fond de la liste
         value: selectedTransfo,
         
-        icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
-        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        icon: const Icon(Icons.arrow_drop_down, color: Colors.black),
+        style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         underline: const SizedBox(), // Retirer la ligne par défaut
         items: allTransformersData.keys.map((String key) {
           return DropdownMenuItem<String>(
@@ -106,7 +110,7 @@ Row(
             chartValuesOptions: const ChartValuesOptions(
               showChartValues: true,
               showChartValueBackground: false,
-              chartValueStyle: TextStyle(color: Colors.white),
+              chartValueStyle: TextStyle(color: Colors.black),
               showChartValuesInPercentage: false,
             ),
             legendOptions: const LegendOptions(
@@ -114,7 +118,7 @@ Row(
               showLegendsInRow: true,
               legendShape: BoxShape.rectangle,
               legendPosition: LegendPosition.top,
-              legendTextStyle: TextStyle(color: Colors.white),
+              legendTextStyle: TextStyle(color: Colors.black),
             ),
           ),
         ),
